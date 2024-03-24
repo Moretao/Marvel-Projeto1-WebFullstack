@@ -130,3 +130,26 @@ body.sticky-header {
         }
     }
 }
+
+
+
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+input[type="text"],
+button {
+    padding: 10px;
+    margin: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+#results {
+    margin-top: 20px;
+}
