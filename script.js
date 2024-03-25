@@ -1,59 +1,82 @@
+let input = document.getElementById("input-box");
+let button = document.getElementById("submit-button");
+let showContainer = document.getElementById("show-container");
+let listContainer = document.querySelector(".list");
 
-// header
-$(function () {
-    $(window).scroll(function () {
-        var winTop = $(window).scrollTop();
-        if (winTop >= 30) {
-            $("body").addClass("sticky-header");
-            $("header").css("background-color", "#3c3c3c"); // Mantém a cor do cabeçalho
-        } else {
-            $("body").removeClass("sticky-header");
+// data atual
+let date = new Date();
+console.log(date.getTime());
 
-        }
+// Variaveis  para autenticação na API
+const timestamp = ts;
+const apiKey = publicKey;
+const hashValue = hashVal;
+
+
+function displayWords(value) {
+    input.value = value;
+    removeElements();
+}
+
+
+function removeElements() {
+    listContainer.innerHTML = "";
+}
+
+// Adicionando um ouvinte de evento 
+input.addEventListener("keyup", async () => {
+    removeElements();
+    if (input.value.length < 4) {
+        return false;
+    }
+
+    // URL para consulta da API 
+    const url = `https://gateway.marvel.com:443/v1/public/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}&nameStartsWith=${input.value}`;
+
+    // Fazendo a requisição HTTP para a API 
+    const response = await fetch(url);
+    const jsonData = await response.json();
+
+    // Iterando para exibir sugestoes de personagens
+    jsonData.data["results"].forEach((result) => {
+        let name = result.name;
+        let div = document.createElement("div");
+        div.style.cursor = "pointer";
+        div.classList.add("autocomplete-items");
+        div.setAttribute("onclick", "displayWords('" + name + "')");
+        let word = "<b>" + name.substr(0, input.value.length) + "</b>";
+        word += name.substr(input.value.length);
+        div.innerHTML = `<p class="item">${word}</p>`;
+        listContainer.appendChild(div); // Adicionando a sugestão a lista
     });
 });
-// header
 
+// Adicionando um ouvinte de evento para o botão de pesquisa
+button.addEventListener(
+    "click",
+    (getRsult = async () => {
+        if (input.value.trim().length < 1) {
+            alert("Input cannot be blank");
+        }
+        showContainer.innerHTML = "";
+        const url = `https://gateway.marvel.com:443/v1/public/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}&name=${input.value}`;
 
-async function searchCharacter() {
-    const publicKey = '6725d388f48f4532fcc10b54d67e29d8';
-    const privateKey = 'd26c4836ad0a449688977ecbc8b6f776836dd9d2';
-    const ts = new Date().getTime();
-    const hash = md5(ts + privateKey + publicKey);
-    const characterName = document.getElementById('searchInput').value;
+        // Fazendo a requisição para obter detalhes sobre o personagem
+        const response = await fetch(url);
+        const jsonData = await response.json();
+        jsonData.data["results"].forEach((element) => {
+            showContainer.innerHTML = `<div class="card-container">
+        <div class="container-character-image">
+        <img src="${element.thumbnail["path"] + "." + element.thumbnail["extension"]
+                }"/></div>
+        <div class="character-name">${element.name}</div>
+        <div class="character-description">${element.description}</div>
+        </div>`;
+        });
+    })
+);
 
-    if (characterName.trim() === '') {
-        alert('Por favor, digite o nome do personagem.');
-        return;
-    }
-
-    const apiUrl = `https://gateway.marvel.com/v1/public/characters?name=${characterName}&ts=${ts}&apikey=${publicKey}&hash=${hash}`;
-
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        displayResults(data.data.results);
-    } catch (error) {
-        console.error('Erro ao buscar personagem:', error);
-    }
-}
-
-function displayResults(characters) {
-    const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = '';
-
-    if (characters.length === 0) {
-        resultsContainer.innerHTML = 'Nenhum resultado encontrado.';
-        return;
-    }
-
-    characters.forEach(character => {
-        const characterDiv = document.createElement('div');
-        characterDiv.innerHTML = `
-            <h3>${character.name}</h3>
-            <img src="${character.thumbnail.path}.${character.thumbnail.extension}" alt="${character.name}">
-            <p>${character.description}</p>
-        `;
-        resultsContainer.appendChild(characterDiv);
-    });
-}
+// Evento de carregamento para obter os resultados ao carregar a pagina
+window.onload = () => {
+    getRsult();
+};

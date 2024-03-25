@@ -11,61 +11,23 @@
 </head>
 
 <body>
-    <header>
-
-
-        <h1>Marvel Pantheon</h1>
-        <nav>
-            <a href="#" class="active">Home</a>
-            <a href="#">About</a>
-            <a href="#">Gallery</a>
-            <a href="#">Contact</a>
-        </nav>
-
-    </header>
-
+    <div class="tittle">
+        <h1>MARVEL PANTHEON</h1>
+        <h3>Explore o universo da Marvel, descubra todos os personagens da Marvel com facilidade! </h3>
+    </div>
     <div class="container">
-        <h1>Marvel API SPA</h1>
-        <input type="text" id="searchInput" placeholder="Digite o nome do personagem">
-        <button onclick="searchCharacter()">Buscar</button>
-        <div id="results"></div>
+        <div class="input-container">
+            <input type="text" class="input" value="Spider-Man (Ultimate)" id="input-box" />
+            <button class="button" id="submit-button">Pesquisar</button>
+        </div>
+        <div class="list"></div>
+        <div class="display-container" id="show-container"></div>
     </div>
 
+    <script src="./api-data.js"></script>
+    <script src="./script.js"></script>
 
-    <!-- <div class="wrapper">
-        <section id='steezy'>
-            <h2> This is some steezy stuff</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis
-                laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque,
-                voluptate voluptatibus nostrum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex libero
-                cupiditate deserunt earum, fuga, ab labore esse animi, nihil est tenetur non delectus perferendis.
-                Maxime accusamus ea rem sint at!</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis
-                laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque,
-                voluptate voluptatibus nostrum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ut
-                aspernatur omnis neque iusto. Veritatis rem ad atque optio perferendis. Dolorum qui consequatur,
-                repellat soluta impedit porro totam molestiae sit.</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis
-                laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque,
-                voluptate voluptatibus nostrum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus
-                iusto, omnis quas, rem minus cupiditate, sunt voluptates minima sint nemo ipsa itaque consequatur dolor,
-                quam necessitatibus vitae. Quod, eaque, quam.</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis
-                laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque,
-                voluptate voluptatibus nostrum!</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis
-                laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque,
-                voluptate voluptatibus nostrum!</p>
-        </section> -->
-
-
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+</body>
 
 </body>
 
