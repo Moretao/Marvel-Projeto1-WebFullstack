@@ -1,43 +1,45 @@
+
 let input = document.getElementById("input-box");
 let button = document.getElementById("submit-button");
 let showContainer = document.getElementById("show-container");
 let listContainer = document.querySelector(".list");
+let errorMessage = document.getElementById("error-message"); // Adicionando a variável para a mensagem de erro
 
 // data atual
 let date = new Date();
 console.log(date.getTime());
 
-// Variaveis  para autenticação na API
+//autenticação na API
 const timestamp = ts;
 const apiKey = publicKey;
 const hashValue = hashVal;
 
-
+// Funçao para exibir sugestões
 function displayWords(value) {
     input.value = value;
     removeElements();
 }
 
-
+// Funçao para remover elementos da lista de sugestoes
 function removeElements() {
     listContainer.innerHTML = "";
 }
 
-// Adicionando um ouvinte de evento 
+//ouvinte de evento para o campo de entrada
 input.addEventListener("keyup", async () => {
     removeElements();
     if (input.value.length < 4) {
         return false;
     }
 
-    // URL para consulta da API 
+    //consulta da API
     const url = `https://gateway.marvel.com:443/v1/public/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}&nameStartsWith=${input.value}`;
 
-    // Fazendo a requisição HTTP para a API 
+    // Fazendo a requisiçao para a API
     const response = await fetch(url);
     const jsonData = await response.json();
 
-    // Iterando para exibir sugestoes de personagens
+    // Iterando para exibir sugestões de personagens
     jsonData.data["results"].forEach((result) => {
         let name = result.name;
         let div = document.createElement("div");
@@ -51,13 +53,22 @@ input.addEventListener("keyup", async () => {
     });
 });
 
-// Adicionando um ouvinte de evento para o botão de pesquisa
+// tratamento de erro
 button.addEventListener(
     "click",
-    (getRsult = async () => {
+    async () => {
         if (input.value.trim().length < 1) {
-            alert("Input cannot be blank");
+            errorMessage.innerText = "A pesquisa não pode ser em branco";
+            return;
         }
+        if (input.value.trim().length < 4) {
+            errorMessage.innerText = "A pesquisa tem que ter mais de 3 caracteres";
+            return;
+        }
+
+        // Limpa a mensagem de erro se a entrada for valida
+        errorMessage.innerText = "";
+
         showContainer.innerHTML = "";
         const url = `https://gateway.marvel.com:443/v1/public/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}&name=${input.value}`;
 
@@ -73,10 +84,11 @@ button.addEventListener(
         <div class="character-description">${element.description}</div>
         </div>`;
         });
-    })
+    }
 );
 
-// Evento de carregamento para obter os resultados ao carregar a pagina
+
+//obter os resultados ao carregar a página
 window.onload = () => {
     getRsult();
 };

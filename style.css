@@ -50,6 +50,12 @@ h1 {
     gap: 1em;
 }
 
+.error-message {
+    color: #ffffff;
+    margin: 1%;
+    font-size: 11px;
+}
+
 input {
     padding: 1em 0.5em;
     background-color: #3c3c3c;
