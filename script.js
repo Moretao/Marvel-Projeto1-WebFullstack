@@ -3,7 +3,7 @@ let input = document.getElementById("input-box");
 let button = document.getElementById("submit-button");
 let showContainer = document.getElementById("show-container");
 let listContainer = document.querySelector(".list");
-let errorMessage = document.getElementById("error-message"); // Adicionando a variável para a mensagem de erro
+let errorMessage = document.getElementById("error-message");
 
 // data atual
 let date = new Date();
