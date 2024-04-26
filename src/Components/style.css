@@ -33,6 +33,7 @@ h1 {
     margin: 0 auto;
     display: flex;
     align-items: center;
+
 }
 
 .header .search {
@@ -46,7 +47,8 @@ h1 {
     color: white;
     font-size: 20px;
     padding: 1.2rem;
-    border: 2px solid #B41F23
+    border: 2px solid #B41F23;
+
 }
 
 .content {
