@@ -3,6 +3,17 @@ body {
     font-size: 1.6rem;
     font-family: "Open Sans", sans-serif;
     color: #fff;
+    height: 100vh;
+        /* Altura total da tela */
+        display: flex;
+        /* Flexbox para alinhamento */
+        justify-content: center;
+        /* Centraliza horizontalmente */
+        align-items: center;
+        /* Centraliza verticalmente */
+        margin: 0;
+        /* Remove margens padrão */
+        
 }
 
 h2 {
@@ -34,7 +45,7 @@ a:active:hover {
 
 .login-form-wrap {
     background-color: #3c3c3c;
-    width: 70%;
+    width: 100%;
     max-width: 400px;
     margin: 30px auto;
     text-align: center;
